@@ -20,6 +20,7 @@ std::unique_ptr<VertexPositionGeometry> geometry;
 
 
 // Loads a mesh from a NumPy array
+// source: https://github.com/rubenwiersma/hsn/blob/master/vectorheat/src/main.cpp
 std::tuple<std::unique_ptr<HalfedgeMesh>, std::unique_ptr<VertexPositionGeometry>>
 loadMesh_np(Eigen::MatrixXd& pos, Eigen::Matrix<size_t, Eigen::Dynamic, Eigen::Dynamic>& faces) {
 
