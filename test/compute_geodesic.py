@@ -1,6 +1,9 @@
+# stdlib
+from time import time
 # 3p
 import numpy as np
-from tridesic import get_heat_geodesics
+import scipy.io as sio
+from tridesic import get_heat_geodesics, get_fmm_geodesics, get_exact_geodesics
 
 
 def read_off(file):
@@ -16,11 +19,29 @@ def read_off(file):
 
 
 def main():
-    verts, faces = read_off("012.off")
+    mesh = "001"
+    verts, faces = read_off(mesh + ".off")
 
+    since = time()
     geodesic_dist = get_heat_geodesics(verts, faces)
-    print(geodesic_dist.shape)
-    print(geodesic_dist[2])
+    print(f"\nGeodesics in the heat took: {time() - since:.1f}s")
+    sio.savemat(f"{mesh}_heat.mat", {"geod_dist": geodesic_dist})
+    print(f"Geodesic matrix shape: {geodesic_dist.shape}")
+    print(f"Geodesic distance from vertex 2: {geodesic_dist[2]}")
+
+    since = time()
+    geodesic_dist = get_fmm_geodesics(verts, faces)
+    print(f"\nFast Marching Method took: {time() - since:.1f}s")
+    sio.savemat(f"{mesh}_fmm.mat", {"geod_dist": geodesic_dist})
+    print(f"Geodesic matrix shape: {geodesic_dist.shape}")
+    print(f"Geodesic distance from vertex 2: {geodesic_dist[2]}")
+
+    since = time()
+    geodesic_dist = get_exact_geodesics(verts, faces)
+    print(f"\nExact Geodesic Method took: {time() - since:.1f}s")
+    sio.savemat(f"{mesh}_exact.mat", {"geod_dist": geodesic_dist})
+    print(f"Geodesic matrix shape: {geodesic_dist.shape}")
+    print(f"Geodesic distance from vertex 2: {geodesic_dist[2]}")
 
 
 if __name__ == "__main__":

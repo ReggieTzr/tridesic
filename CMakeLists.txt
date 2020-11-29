@@ -11,6 +11,7 @@ add_compile_options(-fPIC)
 # == Deps
 add_subdirectory(deps/geometry-central)
 add_subdirectory(deps/pybind11)
+include_directories(deps/igl)
 
 # == Build our project
 pybind11_add_module(tridesic src/main.cpp)
