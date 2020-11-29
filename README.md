@@ -17,7 +17,7 @@ Install the `tridesic` python module:
 cd .. && pip3 install ./tridesic
 ```
 
-# test
+# Test
 run the `compute_geodesic.py` to verify if the installation is working:
 ```shell
 cd test && python3 compute_geodesic.py
