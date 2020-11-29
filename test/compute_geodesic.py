@@ -24,7 +24,7 @@ def main():
 
     since = time()
     geodesic_dist = get_heat_geodesics(verts, faces)
-    print(f"\nGeodesics in the heat took: {time() - since:.1f}s")
+    print(f"\nThe heat method took: {time() - since:.1f}s")
     sio.savemat(f"{mesh}_heat.mat", {"geod_dist": geodesic_dist})
     print(f"Geodesic matrix shape: {geodesic_dist.shape}")
     print(f"Geodesic distance from vertex 2: {geodesic_dist[2]}")
