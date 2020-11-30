@@ -17,6 +17,24 @@ Install the `tridesic` python module:
 cd .. && pip3 install ./tridesic
 ```
 
+# Usage
+
+`tridesic` provides 3 different algorithms to compute the geodesic matrix of a triangle mesh.
+ - `get_heat_geodesics(vertices: np.array, faces: np.array)` compute the geodesic matrix using the heat method [[1]](#references). This method is the fastest, but gives inaccurate approximation when the quality of the mesh is very bad.
+ - `get_fmm_geodesics(vertices: np.array, faces: np.array)` compute the geodesic matrix using the fast marching method [[2]](#references). This method is pretty fast, and gives accurate approximations (recommended).
+ - `get_exact_geodesics(vertices: np.array, faces: np.array)` compute the geodesic matrix using the Exact geodesic algorithm [[3]](#references). This method computes the **exact** geodesic matrix, however, it's **very** slow.
+
+Basic usage looks like:
+```python
+from tridesic import get_fmm_geodesics
+
+mesh = read_mesh("mesh.obj")  # some function for reading meshes
+vertices = mesh.vertices  # numpy array, shape: Vx3
+faces = mesh.faces # numpy array, shape: Fx3
+
+fmm_geodesics = get_fmm_geodesics(vertices, faces)  # numpy array, shape: VxV
+```
+
 # Test
 run the `compute_geodesic.py` to verify if the installation is working:
 ```shell
@@ -40,5 +58,10 @@ Geodesic distance from vertex 2: [0.7486653  0.30913563 0.  ... 0.27650707 0.925
 
 # Credits
 This repo implements small python bindings to:
- - [Fast Marching Method](http://www-evasion.imag.fr/Membres/Franck.Hetroy/Teaching/ProjetsImage/2006/Bib/sethian_kimmel-1995.pdf) & [The Heat Method for Distance Computation](http://www.cs.cmu.edu/~kmcrane/Projects/HeatMethod/paper.pdf) algorithms provided by [geometry-central](https://geometry-central.net/)
- - The implementation of [Exact geodesic algorithm](https://code.google.com/archive/p/geodesic/) provided by [libigl](https://libigl.github.io/)
+ - Fast Marching Method & The Heat Method for Distance Computationalgorithms provided by [geometry-central](https://geometry-central.net/)
+ - The implementation of Exact geodesic algorithm provided by [libigl](https://libigl.github.io/)
+
+# References
+[1] [The Heat Method for Distance Computation](http://www.cs.cmu.edu/~kmcrane/Projects/HeatMethod/paper.pdf)
+[2] [Computing geodesic paths on manifolds](http://www-evasion.imag.fr/Membres/Franck.Hetroy/Teaching/ProjetsImage/2006/Bib/sethian_kimmel-1995.pdf)
+[3] [The discrete geodesic problem](https://code.google.com/archive/p/geodesic/)
