@@ -63,5 +63,7 @@ This repo implements small python bindings to:
 
 # References
 [1] [The Heat Method for Distance Computation](http://www.cs.cmu.edu/~kmcrane/Projects/HeatMethod/paper.pdf)
+
 [2] [Computing geodesic paths on manifolds](http://www-evasion.imag.fr/Membres/Franck.Hetroy/Teaching/ProjetsImage/2006/Bib/sethian_kimmel-1995.pdf)
+
 [3] [The discrete geodesic problem](https://code.google.com/archive/p/geodesic/)
